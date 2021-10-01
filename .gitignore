@@ -34,3 +34,4 @@ build/
 
 ## MacOS Files ##
 .DS_Store
+/userservice-data/
