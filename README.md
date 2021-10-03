@@ -17,23 +17,16 @@
   mariadb:10
   ```
 
-* Untuk pertama kali dijalankan, ubah application.properties berikut:
-    `spring.jpa.generate-ddl=false
-     spring.jpa.hibernate.ddl-auto=validate`
-
 # Keterangan #
 
-Karena pada project ini kita menggunakan jwt token, maka kita perlu mengubah protocol atau alur dari authentication
-spring security. Maka dibuat 2 Class custom, yaiut:
+Custom spring security protocol:
 
-* CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter, minimal 2 methode dari class ini perlu
-  dirubah/override
+* CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter, membuat custom authentication flow:
     * attemptAuthentication -> dipanggil ketika user request authentication, kemudian dihandle oleh
       authenticationmanager
     * successfulAuthentication -> dipanggil ketika user authentication success, kemudian mengembalikan token
-* CustomAuthorizationFilter extends OncePerRequestFilter, untuk memverifikasi token dan memberikan ijin user akses
-  aplikasi
-    * doFilterInternal -> get info from jwt and give authorization to user
+* CustomAuthorizationFilter extends OncePerRequestFilter, membuat custom authorization flow:
+    * doFilterInternal -> verification token, get info from jwt token and give authorization to user
 
 * @RequiredArgsConstructor Menghasilkan konstruktor dengan argumen yang diperlukan. Pada project ini memiliki fungsi
   yang sama dengan @Autowired.

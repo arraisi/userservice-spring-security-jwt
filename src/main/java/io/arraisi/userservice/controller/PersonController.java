@@ -32,7 +32,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class PersonController {
     private final PersonService personService;
 
-    @GetMapping("/persons")
+    @GetMapping("/person")
     public ResponseEntity<List<Person>> getPersons(){
         return ResponseEntity.ok().body(personService.getPersons());
     }
